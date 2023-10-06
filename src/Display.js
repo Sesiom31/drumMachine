@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import OnOf from "./OnOf";
 
-function Display() {
+function Display({ audioOne, onChangeAudio }) {
+  const [volumen, setVolumen] = useState(30);
+
+  const handleChange = (e) => {
+    setVolumen(e.target.value);
+    console.log("hola");
+  };
   return (
     <div id="display">
       <OnOf />
-      <div>
-        {" "}
-        <h3></h3>
+      <div className="name">
+        <h3>Piano</h3>
       </div>
-      <input type="range" />
+      <input
+        id="volumen"
+        type="range"
+        max={100}
+        min={0}
+        value={volumen}
+        onChange={handleChange}
+      />
       <OnOf />
     </div>
   );

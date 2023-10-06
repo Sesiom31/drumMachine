@@ -2,12 +2,12 @@ import React from "react";
 
 function OnOf() {
   return (
-    <>
-      <h3></h3>
-      <div>
-        <div></div>
+    <div>
+      <h3>Text</h3>
+      <div className="container-movil">
+        <div className="movil"></div>
       </div>
-    </>
+    </div>
   );
 }
 
