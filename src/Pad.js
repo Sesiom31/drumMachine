@@ -10,15 +10,18 @@ function Pad({ value, name, isOn, setNameAudio, srcAudio, volumen }) {
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
     audioRef.current.play();
-    audioRef.current.volume = volumen / 100;
-
     setTimeout(() => {
       setIsActive(false);
     }, 120);
-  }, [setNameAudio, name, volumen]);
+  }, [setNameAudio, name]);
+
+  useEffect(() => {    
+    console.log('volumen')
+    audioRef.current.volume = volumen / 100;
+  }, [volumen]);
 
   useEffect(() => {
-    console.log('hola')
+    console.log("hola");
     const handleKeyDown = (e) => {
       if (isOn && e.key.toUpperCase() === value) {
         setConfig();
@@ -34,7 +37,7 @@ function Pad({ value, name, isOn, setNameAudio, srcAudio, volumen }) {
   const handleClick = () => {
     console.log("btn");
     if (isOn) {
-      setConfig();
+      setConfig();      
     }
   };
 
