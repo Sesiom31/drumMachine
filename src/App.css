@@ -48,6 +48,13 @@ body,
   font-size: 1rem;
   box-shadow: 3px 3px 3px 1px #752f38;
 }
+.drum-pad:active{
+  translate: 2px 4px;
+}
+
+.drum-pad:focus{
+  outline: none;
+}
 
 /* DISPLAY */
 #display {
@@ -75,7 +82,6 @@ h3 {
   height: 100%;
   background-color: #fff;
   border: none;
-  float: left;
 }
 
 #volumen{
@@ -109,6 +115,10 @@ h3 {
   background-color: #a93e4a;
   color: #fff;
   border-radius: 0.3rem;
+  
 }
 
-
+.isActive{
+  background-color: #70001f;
+  
+}

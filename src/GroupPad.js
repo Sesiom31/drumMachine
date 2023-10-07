@@ -2,13 +2,15 @@ import React from "react";
 import { data } from "./data";
 import Pad from "./Pad";
 
-function GroupPad({ audioOne }) {
+function GroupPad({ audioOne,onChangeNameAudio, isOn }) {
   const group = data.map((obj) => {
     return (
       <Pad
         value={obj.code}
         name={audioOne ? obj.nameFirst : obj.nameSecond}
+        onChange = {onChangeNameAudio}
         audio={audioOne ? obj.urlFirst : obj.urlSecond}
+        isOn={isOn}
         key={obj.id}
       />
     );

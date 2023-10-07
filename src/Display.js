@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import OnOf from "./OnOf";
 
-function Display({ audioOne, onChangeAudio }) {
-  const [volumen, setVolumen] = useState(30);
+function Display({ audioOne, onChangeAudio , nameAudio, onChangeIsOn, isOn}) {
+  const [volumen, setVolumen] = useState(70);
 
   const handleChange = (e) => {
     setVolumen(e.target.value);
@@ -10,9 +10,11 @@ function Display({ audioOne, onChangeAudio }) {
   };
   return (
     <div id="display">
-      <OnOf />
+
+      <OnOf  onChange={onChangeIsOn} isValue={isOn} />
+
       <div className="name">
-        <h3>Piano</h3>
+        <h3>{nameAudio}</h3>
       </div>
       <input
         id="volumen"
@@ -22,7 +24,7 @@ function Display({ audioOne, onChangeAudio }) {
         value={volumen}
         onChange={handleChange}
       />
-      <OnOf />
+      <OnOf onChange={onChangeAudio} isValue={audioOne} />
     </div>
   );
 }
