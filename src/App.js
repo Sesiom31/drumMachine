@@ -4,32 +4,28 @@ import Display from "./Display";
 import "./App.css";
 
 function App() {
-  const [audioOne, setAudioOne] = useState(false);
-  const [nameAudio, setNameAudio] = useState("");
-
   const [isOn, setIsOn] = useState(true);
-
-  const handleChangeAudio = (value) => {
-    setAudioOne(value);
-  };
-  const handleNameAudio =(value) =>{
-    setNameAudio(value)
-  }
-
-  const handleIsOn = (value) => {
-    setIsOn(value);
-  };
+  const [isSecondAudio, setIsSecondAudio] = useState(false);
+  const [nameAudio, setNameAudio] = useState("");
+  const [volumen, setVolumen] = useState(40);
 
   return (
     <div id="drum-machine">
-      <GroupPad audioOne={audioOne} isOn={isOn} onChangeNameAudio = {handleNameAudio} />
-      <Display
-        audioOne={audioOne}
-        onChangeAudio={handleChangeAudio}
-        nameAudio= {nameAudio}
-
-        onChangeIsOn={handleIsOn}
+      <GroupPad
         isOn={isOn}
+        isSecondAudio={isSecondAudio}
+        setNameAudio={setNameAudio}
+        volumen={volumen}
+      />
+      <Display
+        isOn={isOn}
+        setIsOn={setIsOn}
+        isSecondAudio={isSecondAudio}
+        setIsSecondAudio={setIsSecondAudio}
+        setNameAudio={setNameAudio}
+        nameAudio={nameAudio}
+        setVolumen={setVolumen}
+        volumen={volumen}
       />
     </div>
   );

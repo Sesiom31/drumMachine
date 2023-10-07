@@ -1,42 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 
-function Pad({ value, name, audio, onChange, isOn }) {
+function Pad({ value, name, isOn, setNameAudio, srcAudio, volumen }) {
   const [isActive, setIsActive] = useState(false);
-  useEffect(() => {
-    console.log("hola");
-    const handleKeypress = (e) => {
-      if (isOn && e.key.toUpperCase() === value) {
-        setIsActive(true);
-        onChange(name);
+  const audioRef = useRef(null);
 
-        setTimeout(() => {
-          setIsActive(false);
-        }, 120);
+  const setConfig = useCallback(() => {
+    setIsActive(true);
+    setNameAudio(name);
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    audioRef.current.play();
+    audioRef.current.volume = volumen / 100;
+
+    setTimeout(() => {
+      setIsActive(false);
+    }, 120);
+  }, [setNameAudio, name, volumen]);
+
+  useEffect(() => {
+    console.log('hola')
+    const handleKeyDown = (e) => {
+      if (isOn && e.key.toUpperCase() === value) {
+        setConfig();
       }
     };
-    window.addEventListener("keydown", handleKeypress);
-    return () => window.removeEventListener("keydown", handleKeypress);
-  }, [value, isOn,name,onChange]);
+    window.addEventListener("keydown", handleKeyDown);
 
-  const handleClick = (e) => {
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setConfig, value, isOn]);
+
+  const handleClick = () => {
     console.log("btn");
     if (isOn) {
-      setIsActive(true);
-      onChange(name);
-      setTimeout(() => {
-        setIsActive(false);
-      }, 120);
+      setConfig();
     }
   };
 
   return (
     <button
-      className={`drum-pad ${isActive && "isActive"}`}
+      className={`drum-pad ${isActive && "isActive"} `}
       id={name}
       onClick={handleClick}
     >
       {value}
-      <audio src={audio} className="clip" id={value}></audio>
+      <audio ref={audioRef} src={srcAudio} className="clip" id={value}></audio>
     </button>
   );
 }

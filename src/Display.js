@@ -1,30 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import OnOf from "./OnOf";
 
-function Display({ audioOne, onChangeAudio , nameAudio, onChangeIsOn, isOn}) {
-  const [volumen, setVolumen] = useState(70);
-
+function Display({
+  isOn,
+  setIsOn,
+  isSecondAudio,
+  setIsSecondAudio,
+  nameAudio,
+  setNameAudio,
+  setVolumen,
+  volumen,
+}) {
   const handleChange = (e) => {
     setVolumen(e.target.value);
-    console.log("hola");
+    setNameAudio(`Volumen: ${e.target.value}`);
+    setTimeout(() => {
+      setNameAudio(" ");
+    }, 1000);
   };
+
   return (
     <div id="display">
-
-      <OnOf  onChange={onChangeIsOn} isValue={isOn} />
+      <OnOf isValue={isOn} setValue={setIsOn} />
 
       <div className="name">
-        <h3>{nameAudio}</h3>
+        <h3>{!isOn ? "" : nameAudio.replace("-", " ")}</h3>
       </div>
       <input
         id="volumen"
         type="range"
         max={100}
         min={0}
+        step={1}
         value={volumen}
         onChange={handleChange}
       />
-      <OnOf onChange={onChangeAudio} isValue={audioOne} />
+      <OnOf isValue={isSecondAudio} setValue={setIsSecondAudio} />
     </div>
   );
 }

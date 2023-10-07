@@ -1,16 +1,18 @@
 import React from "react";
 
-function OnOf({onChange, isValue}) {
+function OnOf({ isValue, setValue }) {
+  const handleToggle = () => {
+    setValue(!isValue);
+  };
 
-  const handleClick = ()=>{
-    console.log('onof')
-    onChange(!isValue)
-  }
   return (
     <div>
       <h3>Text</h3>
-      <div className="container-movil" onClick={handleClick}>
-        <div className="movil" style={{float: isValue ? 'right' :'left'}} ></div>
+      <div className="container-movil" onClick={handleToggle}>
+        <div
+          className="movil"
+          style={{ float: isValue ? "left" : "right" }}
+        ></div>
       </div>
     </div>
   );
